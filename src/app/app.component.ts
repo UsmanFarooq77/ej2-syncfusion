@@ -1,9 +1,8 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { sampleData } from './jsontreegriddata';
 import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
 import {  EditSettingsModel } from '@syncfusion/ej2-treegrid';
-import { TreeGridComponent,ColumnChooserService, ToolbarService } from '@syncfusion/ej2-angular-treegrid';
+import { TreeGridComponent } from '@syncfusion/ej2-angular-treegrid';
 
 
 @Component({
@@ -29,7 +28,6 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
       this.data =  new DataManager({ url: 'https://ej2services.syncfusion.com/production/web-services/api/SelfReferenceData', adaptor: new WebApiAdaptor });
       this.pageSetting = { pageCount: 3 };
-        // this.data = sampleData;
         this.contextMenuItems = ['AutoFit', 'AutoFitAll', 'SortAscending', 'SortDescending',
          'Edit', 'Delete', 'Save', 'Cancel',
         'PdfExport', 'ExcelExport', 'CsvExport', 'FirstPage', 'PrevPage',

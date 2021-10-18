@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule
   ],
   providers: [SortService, ResizeService, PageService, EditService, ExcelExportService, PdfExportService, ContextMenuService
-    ,ColumnChooserService, ToolbarService],
+    , ColumnChooserService, ToolbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
