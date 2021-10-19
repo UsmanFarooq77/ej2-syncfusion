@@ -9,6 +9,9 @@ import { removeClass, addClass } from '@syncfusion/ej2-base';
 import { DropDownList, ChangeEventArgs } from '@syncfusion/ej2-angular-dropdowns';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { GridComponent, IFilterUI, Column } from '@syncfusion/ej2-angular-grids';
+import { CheckBoxComponent } from '@syncfusion/ej2-angular-buttons';
+import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
+import { SortEventArgs } from '@syncfusion/ej2-grids';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +31,26 @@ export class AppComponent implements OnInit {
   @ViewChild('dropdown1')
   public dropdown1: DropDownListComponent;
 
+  @ViewChild('taskName')
+  public taskName: CheckBoxComponent;
+  @ViewChild('taskID')
+  public taskID: CheckBoxComponent;
+  // @ViewChild('orderDate')
+  // public orderDate: CheckBoxComponent;
+  // @ViewChild('units')
+  // public units: CheckBoxComponent;
+  // @ViewChild('price')
+  // public price: CheckBoxComponent;
+
+  @ViewChild('dropdown2')
+  public dropdown0: DropDownListComponent;
+
+  @ViewChild('dropdown2')
+  public dropdown2: DropDownListComponent;
+
+  @ViewChild('dropdown3')
+  public dropdown3: DropDownListComponent;
+
   // public data: Object[] = [];
   public pageSettings: Object;
   public contextMenuItems: string[] = [];
@@ -41,6 +64,16 @@ export class AppComponent implements OnInit {
   public dropDownFilter: DropDownList;
   public d1data: Object;
   public fields1: Object;
+  public sortSettings: Object;
+  
+ // For Selection
+  public selectionSettings: Object;
+  // public d0data: Object;
+  // public fields0: Object;
+  public d2data: Object;
+  public fields2: Object;
+  public d3data: Object;
+  public fields3: Object;
 
   //   constructor(@Inject('sourceFiles') private sourceFiles: any) {
   //     sourceFiles.files = ['./app.component.css'];
@@ -92,13 +125,121 @@ export class AppComponent implements OnInit {
     this.d1data = [{ id: 'Parent', mode: 'Parent' },
     { id: 'Child', mode: 'Child' },
     { id: 'Both', mode: 'Both' },
-    { id: 'None', mode: 'None' },]
+    { id: 'None', mode: 'None' },];
+
+    this.sortSettings = {
+      columns: [{ field: 'taskID', direction: 'Ascending' },
+      { field: 'taskName', direction: 'Ascending' }]
+    }
+
+    // For selection
+
+    this.selectionSettings = { type: 'Multiple' };
+    this.fields1 = { text: 'type', value: 'id' };
+    this.d1data = [{ id: 'Single', type: 'Single' },
+    { id: 'Multiple', type: 'Multiple' }],
+      this.fields2 = { text: 'mode', value: 'id' };
+    this.d2data = [{ id: 'Row', mode: 'Row' },
+    { id: 'Cell', mode: 'Cell' },],
+      this.fields3 = { text: 'mode', value: 'id' };
+    this.d3data = [{ id: 'Flow', mode: 'Flow' },
+    { id: 'Box', mode: 'Box' }]
   }
+
   change(e: ChangeEventArgs): void {
     let mode: any = <string>e.value;
     this.treegrid.filterSettings.hierarchyMode = mode;
     this.treegrid.clearFiltering();
     this.dropDownFilter.value = 'All';
+  }
+
+  // For Multi-Sorting
+  public onClick1(e: MouseEvent): void {
+    if (this.taskName.checked) {
+      this.treegrid.sortByColumn('taskName', 'Ascending', true);
+    } else {
+      this.treegrid.grid.removeSortColumn('taskName');
+    }
+
+  }
+  public onClick2(e: MouseEvent): void {
+    if (this.taskID.checked) {
+      this.treegrid.sortByColumn('taskID', 'Ascending', true);
+    } else {
+      this.treegrid.grid.removeSortColumn('taskID');
+    }
+
+  }
+  // public onClick3(e: MouseEvent): void {
+  //   if (this.orderDate.checked) {
+  //     this.treegrid.sortByColumn('orderDate', 'Ascending', true);
+  //   } else {
+  //     this.treegrid.grid.removeSortColumn('orderDate');
+  //   }
+
+  // }
+  // public onClick4(e: MouseEvent): void {
+  //   if (this.units.checked) {
+  //     this.treegrid.sortByColumn('units', 'Ascending', true);
+  //   } else {
+  //     this.treegrid.grid.removeSortColumn('units');
+  //   }
+
+  // }
+
+  public sort(args: SortEventArgs): void {
+    if (args.requestType === 'sorting') {
+      for (let columns of this.treegrid.getColumns()) {
+        for (let sortcolumns of this.treegrid.sortSettings.columns) {
+          if (sortcolumns.field === columns.field) {
+            this.check(sortcolumns.field, true); break;
+          } else {
+            this.check(columns.field, false);
+          }
+        }
+      }
+    }
+
+  }
+  public check(field: string, state: boolean): void {
+    switch (field) {
+      case 'taskName':
+        this.taskName.checked = state; break;
+      case 'taskID':
+        this.taskID.checked = state; break;
+      // case 'orderDate':
+      //   this.orderDate.checked = state; break;
+      // case 'units':
+      //   this.units.checked = state; break;
+      // case 'price':
+      //   this.price.checked = state; break;
+    }
+  }
+  // For Selection
+  change1(e: ChangeEventArgs): void {
+    let type: any = <string>e.value;
+    let mode: any = <string>this.dropdown2.value;
+    this.treegrid.selectionSettings.type = type;
+    if (type === 'Multiple' && mode === 'Cell') {
+      document.getElementById('cellselection').style.display = 'table-row';
+    } else {
+      document.getElementById('cellselection').style.display = 'none';
+    }
+  }
+  // For selection
+  change2(e: ChangeEventArgs): void {
+    let mode: any = e.value;
+    let type: any = <string>this.dropdown0.value;
+    this.treegrid.selectionSettings.mode = mode;
+    if (type === 'Multiple' && mode === 'Cell') {
+      document.getElementById('cellselection').style.display = 'table-row';
+    } else {
+      document.getElementById('cellselection').style.display = 'none';
+    }
+  }
+  change3(e: ChangeEventArgs): void {
+    let cellmode: any = <string>e.value;
+    this.treegrid.selectionSettings.cellSelectionMode = cellmode;
   }
 }
 

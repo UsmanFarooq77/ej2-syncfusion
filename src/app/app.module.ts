@@ -9,6 +9,8 @@ import { DropDownTreeModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons'
 import { GridModule } from '@syncfusion/ej2-angular-grids';
+
+import { CheckBoxAllModule, CheckBoxModule} from '@syncfusion/ej2-angular-buttons';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -22,7 +24,9 @@ import { AppComponent } from './app.component';
     DropDownButtonModule,
     DropDownListModule,
     DropDownTreeModule,
-    GridModule
+    GridModule,
+    CheckBoxModule,
+    
   ],
   providers: [SortService, ResizeService, PageService, EditService, ExcelExportService, PdfExportService, ContextMenuService
     , ColumnChooserService, ToolbarService, FreezeService, SelectionService, FilterService,],

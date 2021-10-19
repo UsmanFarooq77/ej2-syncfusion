@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~9.0.2",
     "@angular/platform-browser-dynamic": "~9.0.2",
     "@angular/router": "~9.0.2",
+    "@syncfusion/ej2-angular-buttons": "^19.3.44",
     "@syncfusion/ej2-angular-dropdowns": "^19.3.45",
     "@syncfusion/ej2-angular-grids": "^19.3.46",
     "@syncfusion/ej2-angular-splitbuttons": "^19.3.45",
