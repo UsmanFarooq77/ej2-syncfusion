@@ -26,7 +26,7 @@
         </td>
         <td style="width: 50%">
           <div>
-            <ejs-dropdownlist #dropdown1 id='mode' width='100px' [dataSource]='d1data' [fields]='fields1' value='Parent'
+            <ejs-dropdownlist #dropdown1 id='mode' width='100px' [dataSource]='d0data' [fields]='fields0' value='Parent'
               (change)="change($event)"></ejs-dropdownlist>
           </div>
         </td>
@@ -39,39 +39,39 @@
 <br>
 <div class="col-lg-3 property-section">
   <div class="property-panel-section">
-              <div class="property-panel-header">Properties </div>
-      <table id="property" class="property-panel-table" title="Properties" style="width: 100%">
-          <tr>
-              <td style="width: 70%">
-                  <div>
-                      Order Name
-                  </div>
-              </td>
-              <td style="width: 30%;padding:10px 10px 10px 0px">
-                  <div class="col-md-6">
-                      <ejs-checkbox #taskName [checked]="true" (change)="onClick1($event)" ></ejs-checkbox>
-                  </div>
-              </td>
-          </tr>
-          <tr>
-              <td style="width: 70%">
-                  <div>
-                      Category
-                  </div>
-              </td>
-              <td style="width: 30%;padding:10px 10px 10px 0px">
-                  <div class="col-md-6">
-                          <ejs-checkbox  #taskID [checked]="true" (change)="onClick2($event)" ></ejs-checkbox>
-                      </div>
-              </td>
-          </tr>
-          <tr>
-              <td style="width: 70%">
-                  <div>
-                      Order Date
-                  </div>
-              </td>
-              <!-- <td style="width: 30%; padding:10px 10px 10px 0px">
+    <div class="property-panel-header">Properties </div>
+    <table id="property" class="property-panel-table" title="Properties" style="width: 100%">
+      <tr>
+        <td style="width: 70%">
+          <div>
+            Order Name
+          </div>
+        </td>
+        <td style="width: 30%;padding:10px 10px 10px 0px">
+          <div class="col-md-6">
+            <ejs-checkbox #taskName [checked]="true" (change)="onClick1($event)"></ejs-checkbox>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 70%">
+          <div>
+            Category
+          </div>
+        </td>
+        <td style="width: 30%;padding:10px 10px 10px 0px">
+          <div class="col-md-6">
+            <ejs-checkbox #taskID [checked]="true" (change)="onClick2($event)"></ejs-checkbox>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 70%">
+          <div>
+            Order Date
+          </div>
+        </td>
+        <!-- <td style="width: 30%; padding:10px 10px 10px 0px">
                   <div class="col-md-6">
                           <ejs-checkbox  #orderDate  (change)="onClick3($event)" ></ejs-checkbox>
                       </div>
@@ -88,53 +88,56 @@
                           <ejs-checkbox  #units  (change)="onClick4($event)" ></ejs-checkbox>
                       </div>
               </td> -->
-          </tr>
-        
-      </table>
+      </tr>
+
+    </table>
   </div>
 </div>
 <br>
- <!-- // For Selection -->
+<!-- // For Selection -->
 <div class="col-lg-3 property-section">
   <div class="property-panel-section">
-              <div class="property-panel-header">Properties </div>
-      <table id="property" class="property-panel-table" title="Properties" style="width: 100%">
-          <tr>
-              <td style="width: 30%">
-                  <div style="padding-top: 7px">Selection Type</div>
-              </td>
-              <td style="width: 70%;padding-right: 10px">
-                  <div>
-                          <ejs-dropdownlist #dropdown0 id='element1' width= '110px' [dataSource]='d1data' [fields]='fields1' value='Multiple'(change)="change1($event)"></ejs-dropdownlist>
-                  </div>
-              </td>
-          </tr>
-          <tr>
-              <td style="width: 30%">
-                  <div>
-                      Selection Mode
-                  </div>
-              </td>
-              <td style="width: 70%">
-                  <div style="padding-right: 10px;padding-bottom: 10px">
-                          <ejs-dropdownlist #dropdown2 id='element2' width= '110px' [dataSource]='d2data' [fields]='fields2' value='Row' (change)="change2($event)" ></ejs-dropdownlist>
-                  </div>
-              </td>
-          </tr>
-          <tr id='cellselection' style='display: none'>
-              <td style="width: 30%;">
-                  <div>
-                     Cell Selection Mode
-                  </div>
-              </td>
-              <td style="width: 70%;">
-                  <div style="padding-right: 10px;padding-bottom: 10px">
-                          <ejs-dropdownlist #dropdown3 id='element3' width= '110px' [dataSource]='d3data' [fields]='fields3' value='Flow' (change)="change3($event)"></ejs-dropdownlist>
-                  </div>
-              </td>
-          </tr>
-      </table>
-</div>
+    <div class="property-panel-header">Properties </div>
+    <table id="property" class="property-panel-table" title="Properties" style="width: 100%">
+      <tr>
+        <td style="width: 30%">
+          <div style="padding-top: 7px">Selection Type</div>
+        </td>
+        <td style="width: 70%;padding-right: 10px">
+          <div>
+            <ejs-dropdownlist #dropdown0 id='element1' width='110px' [dataSource]='d1data' [fields]='fields1'
+              value='Multiple' (change)="change1($event)"></ejs-dropdownlist>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 30%">
+          <div>
+            Selection Mode
+          </div>
+        </td>
+        <td style="width: 70%">
+          <div style="padding-right: 10px;padding-bottom: 10px">
+            <ejs-dropdownlist #dropdown2 id='element2' width='110px' [dataSource]='d2data' [fields]='fields2'
+              value='Row' (change)="change2($event)"></ejs-dropdownlist>
+          </div>
+        </td>
+      </tr>
+      <tr id='cellselection' style='display: none'>
+        <td style="width: 30%;">
+          <div>
+            Cell Selection Mode
+          </div>
+        </td>
+        <td style="width: 70%;">
+          <div style="padding-right: 10px;padding-bottom: 10px">
+            <ejs-dropdownlist #dropdown3 id='element3' width='110px' [dataSource]='d3data' [fields]='fields3'
+              value='Flow' (change)="change3($event)"></ejs-dropdownlist>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 
@@ -143,8 +146,9 @@
 <ejs-treegrid #treegrid [dataSource]='data' childMapping='subtasks' [treeColumnIndex]='1' allowExcelExport='true'
   allowPdfExport='true' [contextMenuItems]="contextMenuItems" [editSettings]='editing' [toolbar]="toolbar"
   [showColumnChooser]='true' [frozenColumns]='1' [allowSelection]='true' [enableHover]='true' [allowFiltering]='true'
-  [filterSettings]='filterSettings' [allowSorting]='true' [sortSettings]='sortSettings'  (actionComplete)="sort($event)"
-  [selectionSettings]='selectionSettings'>
+  [filterSettings]='filterSettings' [allowSorting]='true' [sortSettings]='sortSettings' (actionComplete)="sort($event)"
+  [selectionSettings]='selectionSettings' [allowResizing]='true' [allowReordering]='true' [allowRowDragAndDrop]='true'
+  [selectionSettings]='selectOptions'>
 
   <e-columns>
     <e-column field='taskID' headerText='Task ID' textAlign='Right' width=90></e-column>

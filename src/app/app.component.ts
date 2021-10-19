@@ -65,15 +65,18 @@ export class AppComponent implements OnInit {
   public d1data: Object;
   public fields1: Object;
   public sortSettings: Object;
-  
- // For Selection
+
+  // For Selection
   public selectionSettings: Object;
-  // public d0data: Object;
-  // public fields0: Object;
+  public d0data: Object;
+  public fields0: Object;
   public d2data: Object;
   public fields2: Object;
   public d3data: Object;
   public fields3: Object;
+
+  // For Row Drag and Drop
+  public selectOptions: Object;
 
   //   constructor(@Inject('sourceFiles') private sourceFiles: any) {
   //     sourceFiles.files = ['./app.component.css'];
@@ -121,8 +124,8 @@ export class AppComponent implements OnInit {
         this.dropDownFilter.appendTo('#duration');
       }
     };
-    this.fields1 = { text: 'mode', value: 'id' };
-    this.d1data = [{ id: 'Parent', mode: 'Parent' },
+    this.fields0 = { text: 'mode', value: 'id' };
+    this.d0data = [{ id: 'Parent', mode: 'Parent' },
     { id: 'Child', mode: 'Child' },
     { id: 'Both', mode: 'Both' },
     { id: 'None', mode: 'None' },];
@@ -143,7 +146,10 @@ export class AppComponent implements OnInit {
     { id: 'Cell', mode: 'Cell' },],
       this.fields3 = { text: 'mode', value: 'id' };
     this.d3data = [{ id: 'Flow', mode: 'Flow' },
-    { id: 'Box', mode: 'Box' }]
+    { id: 'Box', mode: 'Box' }];
+
+    // For Row Drag and Drop
+    this.selectOptions = { type: 'Multiple' };
   }
 
   change(e: ChangeEventArgs): void {
