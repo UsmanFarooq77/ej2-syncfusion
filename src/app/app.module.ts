@@ -2,9 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { TreeGridModule } from '@syncfusion/ej2-angular-treegrid';
+import { FilterService, FreezeService, SelectionService, TreeGridModule, } from '@syncfusion/ej2-angular-treegrid';
 import { SortService, ResizeService, PageService, EditService, ExcelExportService, PdfExportService, ContextMenuService } from '@syncfusion/ej2-angular-treegrid';
 import { ColumnChooserService, ToolbarService } from '@syncfusion/ej2-angular-treegrid';
+import { DropDownTreeModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons'
+import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -14,10 +18,14 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     TreeGridModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DropDownButtonModule,
+    DropDownListModule,
+    DropDownTreeModule,
+    GridModule
   ],
   providers: [SortService, ResizeService, PageService, EditService, ExcelExportService, PdfExportService, ContextMenuService
-    , ColumnChooserService, ToolbarService],
+    , ColumnChooserService, ToolbarService, FreezeService, SelectionService, FilterService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
