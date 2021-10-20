@@ -21,8 +21,8 @@ import { SortEventArgs } from '@syncfusion/ej2-grids';
 
 })
 export class AppComponent implements OnInit {
-  // public data: DataManager;
-  public data: Object[];
+  public data: DataManager;
+  // public data: Object[];
 
   public pageSetting: Object;
 
@@ -35,12 +35,16 @@ export class AppComponent implements OnInit {
   public taskName: CheckBoxComponent;
   @ViewChild('taskID')
   public taskID: CheckBoxComponent;
-  // @ViewChild('orderDate')
-  // public orderDate: CheckBoxComponent;
-  // @ViewChild('units')
-  // public units: CheckBoxComponent;
-  // @ViewChild('price')
-  // public price: CheckBoxComponent;
+  @ViewChild('startDate')
+  public startDate: CheckBoxComponent;
+  @ViewChild('endDate')
+  public endDate: CheckBoxComponent;
+  @ViewChild('duration')
+  public duration: CheckBoxComponent;
+   @ViewChild('progress')
+  public progress: CheckBoxComponent;
+   @ViewChild('priority')
+  public priority: CheckBoxComponent;
 
   @ViewChild('dropdown2')
   public dropdown0: DropDownListComponent;
@@ -83,8 +87,8 @@ export class AppComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    // this.data = new DataManager({ url: 'https://ej2services.syncfusion.com/production/web-services/api/SelfReferenceData', adaptor: new WebApiAdaptor });
-    this.data = sampleData;
+    this.data = new DataManager({ url: 'https://ej2services.syncfusion.com/production/web-services/api/SelfReferenceData', adaptor: new WebApiAdaptor });
+    // this.data = sampleData;
     this.pageSetting = { pageCount: 3 };
     this.contextMenuItems = ['AutoFit', 'AutoFitAll', 'SortAscending', 'SortDescending',
       'Edit', 'Delete', 'Save', 'Cancel',
@@ -102,7 +106,7 @@ export class AppComponent implements OnInit {
     this.templateOptions = {
       create: (args: { element: Element }) => {
         let dd: HTMLInputElement = document.createElement('input');
-        dd.id = 'duration';
+        dd.id = 'Duration';
         return dd;
       },
       write: (args: { element: Element }) => {
@@ -121,7 +125,7 @@ export class AppComponent implements OnInit {
             }
           }
         });
-        this.dropDownFilter.appendTo('#duration');
+        this.dropDownFilter.appendTo('#Duration');
       }
     };
     this.fields0 = { text: 'mode', value: 'id' };
@@ -130,10 +134,15 @@ export class AppComponent implements OnInit {
     { id: 'Both', mode: 'Both' },
     { id: 'None', mode: 'None' },];
 
-    this.sortSettings = {
-      columns: [{ field: 'taskID', direction: 'Ascending' },
-      { field: 'taskName', direction: 'Ascending' }]
-    }
+    // this.sortSettings = {
+    //   columns: [{ field: 'TaskID', direction: 'Ascending' },
+    //   { field: 'TaskName', direction: 'Ascending' },
+    //   { field: 'StartDate', direction: 'Ascending' },
+    //   { field: 'EndDate', direction: 'Ascending' },
+    //   { field: 'Duration', direction: 'Ascending' },
+    //   { field: 'Progress', direction: 'Ascending' },
+    //   { field: 'Priority', direction: 'Ascending' }]
+    // }
 
     // For selection
 
@@ -176,22 +185,44 @@ export class AppComponent implements OnInit {
     }
 
   }
-  // public onClick3(e: MouseEvent): void {
-  //   if (this.orderDate.checked) {
-  //     this.treegrid.sortByColumn('orderDate', 'Ascending', true);
-  //   } else {
-  //     this.treegrid.grid.removeSortColumn('orderDate');
-  //   }
+  public onClick3(e: MouseEvent): void {
+    if (this.startDate.checked) {
+      this.treegrid.sortByColumn('startDate', 'Ascending', true);
+    } else {
+      this.treegrid.grid.removeSortColumn('startDate');
+    }
 
-  // }
-  // public onClick4(e: MouseEvent): void {
-  //   if (this.units.checked) {
-  //     this.treegrid.sortByColumn('units', 'Ascending', true);
-  //   } else {
-  //     this.treegrid.grid.removeSortColumn('units');
-  //   }
+  }
+  public onClick4(e: MouseEvent): void {
+    if (this.endDate.checked) {
+      this.treegrid.sortByColumn('endDate', 'Ascending', true);
+    } else {
+      this.treegrid.grid.removeSortColumn('endDate');
+    }
 
-  // }
+  }
+  public onClick5(e: MouseEvent): void {
+    if (this.duration.checked) {
+      this.treegrid.sortByColumn('duartion', 'Ascending', true);
+    } else {
+      this.treegrid.grid.removeSortColumn('duartion');
+    }
+
+  }  public onClick6(e: MouseEvent): void {
+    if (this.progress.checked) {
+      this.treegrid.sortByColumn('progress', 'Ascending', true);
+    } else {
+      this.treegrid.grid.removeSortColumn('progress');
+    }
+
+  }  public onClick7(e: MouseEvent): void {
+    if (this.priority.checked) {
+      this.treegrid.sortByColumn('priority', 'Ascending', true);
+    } else {
+      this.treegrid.grid.removeSortColumn('priority');
+    }
+
+  }
 
   public sort(args: SortEventArgs): void {
     if (args.requestType === 'sorting') {
@@ -213,12 +244,16 @@ export class AppComponent implements OnInit {
         this.taskName.checked = state; break;
       case 'taskID':
         this.taskID.checked = state; break;
-      // case 'orderDate':
-      //   this.orderDate.checked = state; break;
-      // case 'units':
-      //   this.units.checked = state; break;
-      // case 'price':
-      //   this.price.checked = state; break;
+      case 'startDate':
+        this.startDate.checked = state; break;
+      case 'endDate':
+        this.endDate.checked = state; break;
+      case 'duration':
+        this.duration.checked = state; break;
+        case 'progress':
+          this.progress.checked = state; break;
+          case 'priority':
+            this.priority.checked = state; break;
     }
   }
   // For Selection

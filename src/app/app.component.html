@@ -1,24 +1,6 @@
-<!-- <div class="col-lg-9 control-section">
-  <ejs-treegrid #treegrid [dataSource]='data' idMapping='TaskID'  parentIdMapping='ParentItem' hasChildMapping='isParent' [treeColumnIndex]='1' allowExcelExport='true' allowPdfExport='true'
-  [contextMenuItems]="contextMenuItems" [editSettings]='editing' [toolbar]="toolbar" [showColumnChooser]= 'true'  [frozenColumns]='1' [allowSelection]='false' [enableHover]='false' [allowFiltering]='true'  [filterSettings]='filterSettings' >
-      <e-columns>
-          <e-column field='TaskID' headerText='Task ID' isPrimaryKey='true' width='80' [edit]='editparams' textAlign='Right' editType='numericedit'></e-column>
-          <e-column field='TaskName' headerText='Task Name' width='150'></e-column>
-          <e-column field='StartDate' headerText='Start Date' width='120' format="yMd" textAlign='Right'></e-column>
-          <e-column field='EndDate' headerText='End Date' width='120' format="yMd" textAlign='Right'></e-column>
-          <e-column field='Duration' headerText='Duration' width='110' textAlign='Right' [filterBarTemplate]="templateOptions"></e-column>
-          <e-column field='Progress' headerText='Progress' width='110'></e-column>
-          <e-column field='Priority' headerText='Priority' width='130'></e-column>
-      </e-columns>
-  </ejs-treegrid>
-</div> -->
-
-
-
-
 <div class="col-lg-3 property-section">
   <div class="property-panel-section">
-    <div class="property-panel-header">Properties </div>
+    <div class="property-panel-header">Properties</div>
     <table id="property" class="property-panel-table" title="Properties" style="width: 100%">
       <tr style="height: 50px">
         <td style="width: 50%">
@@ -26,7 +8,7 @@
         </td>
         <td style="width: 50%">
           <div>
-            <ejs-dropdownlist #dropdown1 id='mode' width='100px' [dataSource]='d0data' [fields]='fields0' value='Parent'
+            <ejs-dropdownlist #dropdown1 id="mode" width="100px" [dataSource]="d0data" [fields]="fields0" value="Parent"
               (change)="change($event)"></ejs-dropdownlist>
           </div>
         </td>
@@ -35,19 +17,16 @@
   </div>
 </div>
 
-
-<br>
+<br />
 <div class="col-lg-3 property-section">
   <div class="property-panel-section">
-    <div class="property-panel-header">Properties </div>
+    <div class="property-panel-header">Properties</div>
     <table id="property" class="property-panel-table" title="Properties" style="width: 100%">
       <tr>
         <td style="width: 70%">
-          <div>
-            Order Name
-          </div>
+          <div>Task Name</div>
         </td>
-        <td style="width: 30%;padding:10px 10px 10px 0px">
+        <td style="width: 30%; padding: 10px 10px 10px 0px">
           <div class="col-md-6">
             <ejs-checkbox #taskName [checked]="true" (change)="onClick1($event)"></ejs-checkbox>
           </div>
@@ -55,11 +34,9 @@
       </tr>
       <tr>
         <td style="width: 70%">
-          <div>
-            Category
-          </div>
+          <div>TaskID</div>
         </td>
-        <td style="width: 30%;padding:10px 10px 10px 0px">
+        <td style="width: 30%; padding: 10px 10px 10px 0px">
           <div class="col-md-6">
             <ejs-checkbox #taskID [checked]="true" (change)="onClick2($event)"></ejs-checkbox>
           </div>
@@ -67,72 +44,99 @@
       </tr>
       <tr>
         <td style="width: 70%">
-          <div>
-            Order Date
+          <div>Start Date</div>
+        </td>
+        <td style="width: 30%; padding:10px 10px 10px 0px">
+          <div class="col-md-6">
+            <ejs-checkbox #startDate (change)="onClick3($event)"></ejs-checkbox>
           </div>
         </td>
-        <!-- <td style="width: 30%; padding:10px 10px 10px 0px">
-                  <div class="col-md-6">
-                          <ejs-checkbox  #orderDate  (change)="onClick3($event)" ></ejs-checkbox>
-                      </div>
-              </td>
-          </tr>
-          <tr>
-              <td style="width: 70%">
-                  <div>
-                      Units
-                  </div>
-              </td>
-              <td style="width: 30%; padding:10px 10px 10px 0px">
-                  <div class="col-md-6">
-                          <ejs-checkbox  #units  (change)="onClick4($event)" ></ejs-checkbox>
-                      </div>
-              </td> -->
       </tr>
-
+      <tr>
+        <td style="width: 70%">
+          <div>
+            End Data
+          </div>
+        </td>
+        <td style="width: 30%; padding:10px 10px 10px 0px">
+          <div class="col-md-6">
+            <ejs-checkbox #endDate (change)="onClick4($event)"></ejs-checkbox>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 70%">
+          <div>
+            Duration
+          </div>
+        </td>
+        <td style="width: 30%; padding:10px 10px 10px 0px">
+          <div class="col-md-6">
+            <ejs-checkbox #duration (change)="onClick5($event)"></ejs-checkbox>
+          </div>
+        </td>
+      </tr>      <tr>
+        <td style="width: 70%">
+          <div>
+            Progress
+          </div>
+        </td>
+        <td style="width: 30%; padding:10px 10px 10px 0px">
+          <div class="col-md-6">
+            <ejs-checkbox #progress (change)="onClick6($event)"></ejs-checkbox>
+          </div>
+        </td>
+      </tr>      <tr>
+        <td style="width: 70%">
+          <div>
+            Priority
+          </div>
+        </td>
+        <td style="width: 30%; padding:10px 10px 10px 0px">
+          <div class="col-md-6">
+            <ejs-checkbox #priority (change)="onClick7($event)"></ejs-checkbox>
+          </div>
+        </td>
+      </tr>
     </table>
   </div>
 </div>
-<br>
+<br />
 <!-- // For Selection -->
 <div class="col-lg-3 property-section">
   <div class="property-panel-section">
-    <div class="property-panel-header">Properties </div>
+    <div class="property-panel-header">Properties</div>
     <table id="property" class="property-panel-table" title="Properties" style="width: 100%">
       <tr>
         <td style="width: 30%">
           <div style="padding-top: 7px">Selection Type</div>
         </td>
-        <td style="width: 70%;padding-right: 10px">
+        <td style="width: 70%; padding-right: 10px">
           <div>
-            <ejs-dropdownlist #dropdown0 id='element1' width='110px' [dataSource]='d1data' [fields]='fields1'
-              value='Multiple' (change)="change1($event)"></ejs-dropdownlist>
+            <ejs-dropdownlist #dropdown0 id="element1" width="110px" [dataSource]="d1data" [fields]="fields1"
+              value="Multiple" (change)="change1($event)"></ejs-dropdownlist>
           </div>
         </td>
       </tr>
       <tr>
         <td style="width: 30%">
-          <div>
-            Selection Mode
-          </div>
+          <div>Selection Mode</div>
         </td>
         <td style="width: 70%">
-          <div style="padding-right: 10px;padding-bottom: 10px">
-            <ejs-dropdownlist #dropdown2 id='element2' width='110px' [dataSource]='d2data' [fields]='fields2'
-              value='Row' (change)="change2($event)"></ejs-dropdownlist>
+          <div style="padding-right: 10px; padding-bottom: 10px">
+            <ejs-dropdownlist #dropdown2 id="element2" width="110px" [dataSource]="d2data" [fields]="fields2"
+              value="Row" (change)="change2($event)"></ejs-dropdownlist>
           </div>
         </td>
       </tr>
-      <tr id='cellselection' style='display: none'>
-        <td style="width: 30%;">
-          <div>
-            Cell Selection Mode
-          </div>
+      <tr id="cellselection" style="display: none">
+        <td style="width: 30%">
+          <div>Cell Selection Mode</div>
         </td>
-        <td style="width: 70%;">
-          <div style="padding-right: 10px;padding-bottom: 10px">
-            <ejs-dropdownlist #dropdown3 id='element3' width='110px' [dataSource]='d3data' [fields]='fields3'
-              value='Flow' (change)="change3($event)"></ejs-dropdownlist>
+        <td style="width: 70%">
+          <div style="padding-right: 10px; padding-bottom: 10px">
+            <ejs-dropdownlist #dropdown3 id="element3" width="110px" [dataSource]="d3data" [fields]="fields3"
+              value="Flow" (change)="change3($event)"></ejs-dropdownlist>
           </div>
         </td>
       </tr>
@@ -140,10 +144,33 @@
   </div>
 </div>
 
+<!-- Remote Data-Source -->
+<div class="col-lg-9 control-section">
+  <ejs-treegrid width="100%" #treegrid [dataSource]="data" hasChildMapping='isParent' parentIdMapping='ParentItem' idMapping='TaskID' [treeColumnIndex]="1"
+    allowExcelExport="true" allowPdfExport="true" [contextMenuItems]="contextMenuItems" [editSettings]="editing"
+    [toolbar]="toolbar" [showColumnChooser]="true" [frozenColumns]="1" [allowSelection]="true" [enableHover]="true"
+    [allowFiltering]="true" [filterSettings]="filterSettings" [allowSorting]="true" [sortSettings]="sortSettings"
+    (actionComplete)="sort($event)" [selectionSettings]="selectionSettings" [allowResizing]="true"
+    [allowReordering]="true" [allowRowDragAndDrop]="true" [selectionSettings]="selectOptions">
 
+    <e-columns>
+      <e-column field="TaskID" headerText="Task ID" isPrimaryKey="true" width="80" [edit]="editparams" textAlign="Right"
+        editType="numericedit"></e-column>
+      <e-column field="TaskName" headerText="Task Name" width="150"></e-column>
+      <e-column field="StartDate" headerText="Start Date" width="80" format="yMd" textAlign="Right"></e-column>
+      <e-column field="EndDate" headerText="End Date" width="80" format="yMd" textAlign="Right"></e-column>
+      <e-column field="Duration" headerText="Duration" width="110" textAlign="Right"
+        [filterBarTemplate]="templateOptions"></e-column>
+      <e-column field="Progress" headerText="Progress" width="110"></e-column>
+      <e-column field="Priority" headerText="Priority" width="130"></e-column>
+    </e-columns>
+  </ejs-treegrid>
+</div>
+
+<!-- Local Data-source -->
 <!-- <ejs-treegrid [dataSource]='data'  [treeColumnIndex]='1' childMapping='subtasks' [allowFiltering]='true'  [filterSettings]='filterSettings'
             > -->
-<ejs-treegrid #treegrid [dataSource]='data' childMapping='subtasks' [treeColumnIndex]='1' allowExcelExport='true'
+<!-- <ejs-treegrid width="100%" #treegrid [dataSource]='data' childMapping='subtasks' [treeColumnIndex]='1' allowExcelExport='true'
   allowPdfExport='true' [contextMenuItems]="contextMenuItems" [editSettings]='editing' [toolbar]="toolbar"
   [showColumnChooser]='true' [frozenColumns]='1' [allowSelection]='true' [enableHover]='true' [allowFiltering]='true'
   [filterSettings]='filterSettings' [allowSorting]='true' [sortSettings]='sortSettings' (actionComplete)="sort($event)"
@@ -151,10 +178,10 @@
   [selectionSettings]='selectOptions'>
 
   <e-columns>
-    <e-column field='taskID' headerText='Task ID' textAlign='Right' width=90></e-column>
-    <e-column field='taskName' headerText='Task Name' textAlign='Left' width=180></e-column>
-    <e-column field='startDate' headerText='Start Date' textAlign='Right' format='yMd' width=90></e-column>
-    <e-column field='duration' headerText='Duration' textAlign='Right' width=80 [filterBarTemplate]="templateOptions">
+    <e-column field='taskID' headerText='Task ID' textAlign='Right' minWidth="100" width=190></e-column>
+    <e-column field='taskName' headerText='Task Name' textAlign='Left' minWidth="100" width=280></e-column>
+    <e-column field='startDate' headerText='Start Date' textAlign='Right' format='yMd' minWidth="100" width=290></e-column>
+    <e-column field='duration' headerText='Duration' textAlign='Right' minWidth="100" width=180 [filterBarTemplate]="templateOptions">
     </e-column>
   </e-columns>
-</ejs-treegrid>`
+</ejs-treegrid>` -->
