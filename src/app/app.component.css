@@ -1,14 +1,33 @@
 /* custom code start*/
 .e-mastertext {
-    font-size: 15px;
-    font-family: Roboto;
-    opacity: 0.87;
-    padding: 1em;
+  font-size: 15px;
+  font-family: Roboto;
+  opacity: 0.87;
+  padding: 1em;
 }
 
 /* custom code start*/
 .e-toolbar-item.e-ghidden .e-btn {
-    background: rgba(0, 0, 0, 0.12);
-    border-color: rgba(0, 0, 0, 0.12);
-    color: #212121;
+  background: rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #212121;
+}
+.header_section {
+  margin: 10px;
+}
+.header_section .header {
+  background-color: lightcoral;
+  border: 1px solid #212121;
+  text-align: center;
+  padding: 12px;
+  font-family: "Roboto";
+}
+.col-md-4 {
+  border: 1px solid lightblue;
+  background-color: #eee;
+  margin-bottom: 40px;
+  padding: 10px;
+  color: #000;
+  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
 }

@@ -1,17 +1,18 @@
 
 import { Component, OnInit, ViewEncapsulation, ViewChild, Inject } from '@angular/core';
 import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
-import { EditSettingsModel } from '@syncfusion/ej2-treegrid';
+import { ContextMenu, ContextMenuItem, EditSettingsModel } from '@syncfusion/ej2-treegrid';
 import { TreeGridComponent } from '@syncfusion/ej2-angular-treegrid';
 import { sampleData } from '../assets/datasource';
 // import { GridComponent, IFilterUI, Column } from '@syncfusion/ej2-angular-grids';
 import { removeClass, addClass } from '@syncfusion/ej2-base';
 import { DropDownList, ChangeEventArgs } from '@syncfusion/ej2-angular-dropdowns';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
-import { GridComponent, IFilterUI, Column } from '@syncfusion/ej2-angular-grids';
+import { GridComponent, IFilterUI, Column, ContextMenuOpenEventArgs } from '@syncfusion/ej2-angular-grids';
 import { CheckBoxComponent } from '@syncfusion/ej2-angular-buttons';
-import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
 import { SortEventArgs } from '@syncfusion/ej2-grids';
+import { BeforeOpenCloseMenuEventArgs, MenuEventArgs } from '@syncfusion/ej2-angular-splitbuttons';
+import { ContextMenuComponent, MenuItem, MenuItemModel } from '@syncfusion/ej2-angular-navigations';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,6 @@ export class AppComponent implements OnInit {
   public treegrid: TreeGridComponent;
   @ViewChild('dropdown1')
   public dropdown1: DropDownListComponent;
-
   @ViewChild('taskName')
   public taskName: CheckBoxComponent;
   @ViewChild('taskID')
@@ -41,23 +41,24 @@ export class AppComponent implements OnInit {
   public endDate: CheckBoxComponent;
   @ViewChild('duration')
   public duration: CheckBoxComponent;
-   @ViewChild('progress')
+  @ViewChild('progress')
   public progress: CheckBoxComponent;
-   @ViewChild('priority')
+  @ViewChild('priority')
   public priority: CheckBoxComponent;
-
   @ViewChild('dropdown2')
   public dropdown0: DropDownListComponent;
-
   @ViewChild('dropdown2')
   public dropdown2: DropDownListComponent;
-
   @ViewChild('dropdown3')
   public dropdown3: DropDownListComponent;
+  @ViewChild('headercontextmenu')
+  public headercontextmenu: ContextMenuComponent;
 
   // public data: Object[] = [];
   public pageSettings: Object;
-  public contextMenuItems: string[] = [];
+  public contextMenuItemsRow: string[] = [];
+  public contextMenuItems: any;
+  public contextMenuSettings: any
   public editing: EditSettingsModel;
   public toolbar: string[];
   public editparams: Object;
@@ -81,6 +82,21 @@ export class AppComponent implements OnInit {
 
   // For Row Drag and Drop
   public selectOptions: Object;
+  public headermenuItems: any[] = [
+    {
+      text: 'Cut', target: '.e-headercontent', id: ''
+    },
+  ];
+  public menuItems: MenuItemModel[] = [
+    {
+      text: 'Cut'
+    },
+    {
+      text: 'Copy'
+    },
+    {
+      text: 'Paste'
+    }];
 
   //   constructor(@Inject('sourceFiles') private sourceFiles: any) {
   //     sourceFiles.files = ['./app.component.css'];
@@ -90,13 +106,47 @@ export class AppComponent implements OnInit {
     this.data = new DataManager({ url: 'https://ej2services.syncfusion.com/production/web-services/api/SelfReferenceData', adaptor: new WebApiAdaptor });
     // this.data = sampleData;
     this.pageSetting = { pageCount: 3 };
-    this.contextMenuItems = ['AutoFit', 'AutoFitAll', 'SortAscending', 'SortDescending',
-      'Edit', 'Delete', 'Save', 'Cancel',
-      'PdfExport', 'ExcelExport', 'CsvExport', 'FirstPage', 'PrevPage',
-      'LastPage', 'NextPage'];
-    this.editing = { allowDeleting: true, allowEditing: true, mode: 'Row' };
+    // this.contextMenuItemsRow = ['AutoFit', 'AutoFitAll', 'SortAscending', 'SortDescending',
+    //   'Edit', 'Delete', 'Save', 'Cancel',
+    //   'PdfExport', 'ExcelExport', 'CsvExport', 'FirstPage', 'PrevPage',
+    //   'LastPage', 'NextPage'];
+    this.editing = { allowDeleting: true, allowEditing: true, allowAdding: true, mode: 'Row' };
+
+    this.contextMenuItems = [
+      { text: 'Insert Column', target: '.e-headercontent', id: 'insert' },
+      { text: 'Delete Column', target: '.e-headercontent', id: 'delete' },
+      { text: 'Edit Column', target: '.e-headercontent', id: 'rename' },
+      {
+        //Enables the context menu
+        text: 'Edit Type',
+        target: '.e-headercontent',
+        // show: true,
+        items: [
+          { text: 'String', id: 'string' },
+          { text: 'Number', id: 'number' },
+          { text: 'Boolean', id: 'boolean' }
+        ],
+        // Hides the default context menu items
+        showCustomMenuOnly: false,
+      },
+      {
+        //Enables the context menu
+        text: 'Add Row',
+        target: '.e-content',
+        show: true,
+        items: [
+          { text: 'Add Next', id: 'string' },
+          { text: 'Add Child', id: 'number' },
+        ],
+        // Hides the default context menu items
+        showCustomMenuOnly: false,
+      },
+
+      'Copy', 'Edit', 'Delete'
+
+    ];
     // this.pageSettings= { pageSize: 10 };
-    this.editparams = { params: { format: 'n' } };
+    // this.editparams = { params: { format: 'n' } };
 
     // For ColumnChooser
     this.toolbar = ['ColumnChooser'];
@@ -134,15 +184,11 @@ export class AppComponent implements OnInit {
     { id: 'Both', mode: 'Both' },
     { id: 'None', mode: 'None' },];
 
-    // this.sortSettings = {
-    //   columns: [{ field: 'TaskID', direction: 'Ascending' },
-    //   { field: 'TaskName', direction: 'Ascending' },
-    //   { field: 'StartDate', direction: 'Ascending' },
-    //   { field: 'EndDate', direction: 'Ascending' },
-    //   { field: 'Duration', direction: 'Ascending' },
-    //   { field: 'Progress', direction: 'Ascending' },
-    //   { field: 'Priority', direction: 'Ascending' }]
-    // }
+    this.sortSettings = {
+      columns: [{ field: 'TaskID', direction: 'Ascending' },
+      { field: 'TaskName', direction: 'Ascending' },
+      ]
+    }
 
     // For selection
 
@@ -171,55 +217,55 @@ export class AppComponent implements OnInit {
   // For Multi-Sorting
   public onClick1(e: MouseEvent): void {
     if (this.taskName.checked) {
-      this.treegrid.sortByColumn('taskName', 'Ascending', true);
+      this.treegrid.sortByColumn('TaskName', 'Ascending', true);
     } else {
-      this.treegrid.grid.removeSortColumn('taskName');
+      this.treegrid.grid.removeSortColumn('TaskName');
     }
 
   }
   public onClick2(e: MouseEvent): void {
     if (this.taskID.checked) {
-      this.treegrid.sortByColumn('taskID', 'Ascending', true);
+      this.treegrid.sortByColumn('TaskID', 'Ascending', true);
     } else {
-      this.treegrid.grid.removeSortColumn('taskID');
+      this.treegrid.grid.removeSortColumn('TaskID');
     }
 
   }
   public onClick3(e: MouseEvent): void {
     if (this.startDate.checked) {
-      this.treegrid.sortByColumn('startDate', 'Ascending', true);
+      this.treegrid.sortByColumn('StartDate', 'Ascending', true);
     } else {
-      this.treegrid.grid.removeSortColumn('startDate');
+      this.treegrid.grid.removeSortColumn('StartDate');
     }
 
   }
   public onClick4(e: MouseEvent): void {
     if (this.endDate.checked) {
-      this.treegrid.sortByColumn('endDate', 'Ascending', true);
+      this.treegrid.sortByColumn('EndDate', 'Ascending', true);
     } else {
-      this.treegrid.grid.removeSortColumn('endDate');
+      this.treegrid.grid.removeSortColumn('EndDate');
     }
 
   }
   public onClick5(e: MouseEvent): void {
     if (this.duration.checked) {
-      this.treegrid.sortByColumn('duartion', 'Ascending', true);
+      this.treegrid.sortByColumn('Duration', 'Ascending', true);
     } else {
-      this.treegrid.grid.removeSortColumn('duartion');
+      this.treegrid.grid.removeSortColumn('Duration');
     }
 
-  }  public onClick6(e: MouseEvent): void {
+  } public onClick6(e: MouseEvent): void {
     if (this.progress.checked) {
-      this.treegrid.sortByColumn('progress', 'Ascending', true);
+      this.treegrid.sortByColumn('Progress', 'Ascending', true);
     } else {
-      this.treegrid.grid.removeSortColumn('progress');
+      this.treegrid.grid.removeSortColumn('Progress');
     }
 
-  }  public onClick7(e: MouseEvent): void {
+  } public onClick7(e: MouseEvent): void {
     if (this.priority.checked) {
-      this.treegrid.sortByColumn('priority', 'Ascending', true);
+      this.treegrid.sortByColumn('Priority', 'Ascending', true);
     } else {
-      this.treegrid.grid.removeSortColumn('priority');
+      this.treegrid.grid.removeSortColumn('Priority');
     }
 
   }
@@ -240,20 +286,20 @@ export class AppComponent implements OnInit {
   }
   public check(field: string, state: boolean): void {
     switch (field) {
-      case 'taskName':
+      case 'TaskName':
         this.taskName.checked = state; break;
-      case 'taskID':
+      case 'TaskID':
         this.taskID.checked = state; break;
-      case 'startDate':
+      case 'StartDate':
         this.startDate.checked = state; break;
-      case 'endDate':
+      case 'EndDate':
         this.endDate.checked = state; break;
-      case 'duration':
+      case 'Duration':
         this.duration.checked = state; break;
-        case 'progress':
-          this.progress.checked = state; break;
-          case 'priority':
-            this.priority.checked = state; break;
+      case 'Progress':
+        this.progress.checked = state; break;
+      case 'Priority':
+        this.priority.checked = state; break;
     }
   }
   // For Selection
@@ -282,5 +328,41 @@ export class AppComponent implements OnInit {
     let cellmode: any = <string>e.value;
     this.treegrid.selectionSettings.cellSelectionMode = cellmode;
   }
-}
+  contextMenuClick(args?: MenuEventArgs): void {
+    // console.log(args);
+    // console.log(this.treegrid);
+    if (args.item.id === 'insert') {
+      let columnName = { field: 'new', headerText: 'NewColumn', width: 100 };
+      this.treegrid.columns.push(columnName as any); // Insert Columns
+      this.treegrid.refreshColumns(); // Refresh Columns
+    } else if (args.item.id === 'delete') {
+      let columnIndex = args['column'].index;
+      this.treegrid.columns.splice(columnIndex, 1); //Splice columns
+      this.treegrid.refreshColumns(); //Refresh Columns
+    } else if (args.item.id === 'rename') {
+      let columnName = args['column'].field;
+      console.log(this.treegrid.getColumnByField(columnName)); //Get the required column
+      this.treegrid.getColumnByField(columnName).headerText = 'Task details'; //Rename column name
+      this.treegrid.refreshColumns(); //Refresh Columns
+    }
+  }
+  contextMenuOpen(args?: ContextMenuOpenEventArgs) {
+    // console.log(args);
+    // console.log(args.rowInfo['target'].className);
+   
+    // if (args.rowInfo['target'].className == 'e-headertext') {
+    //   let contextMenuObj = (args.element as any).ej2_instances[0];
+    //   contextMenuObj.enableItems(["Add Row"],false);
+    // }
+    // else {
+    //    contextMenuObj.enableItems(["Add Row"],true); 
+    // }
+  }
 
+
+  beforeOpen(args): void {
+  }
+
+  select(args): void {
+  }
+}
